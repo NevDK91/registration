@@ -1,0 +1,160 @@
+
+body{
+	margin:0 auto;
+	padding:0 auto;
+}
+h2,h3{
+	font-family:sans-serif;
+	font-weight:normal;
+	text-align:center;
+}
+h3{
+	margin-bottom:0;
+	margin-top:0;
+	padding-top:20px;
+	clear:both;
+}
+a{
+	text-decoration:none;
+	color:#3b77db;
+}
+a:hover{
+	color:#274f92;
+}
+#nav{
+	margin:auto;
+	width:600px;
+	min-height:40px;
+	height:auto;
+	border:1px solid #d9daf9;
+	text-align:center;
+	font-family:sans-serif;
+	font-size:12pt;
+	margin-bottom:10px;
+}
+#nav a{
+	text-decoration:none;
+	color:#3b77db;
+	margin-left:10px;
+	padding-top:10px;
+	display:inline-block;
+}
+#nav a:hover{
+	color:#274f92;
+}
+#main{
+	margin:auto;
+	width:600px;
+	min-height:200px;
+	height:auto;
+	border:1px solid #d9daf9;
+	text-align:center;
+	font-family:sans-serif;
+	font-size:12pt;
+}
+.form > .line > label{
+	display:block;
+	width:150px;
+	height:auto;
+	padding-right:10px;
+	float:left;
+	text-align:left;
+	padding-top:10px;
+	padding-left:10px;
+	font-weight:100;
+	font-size:12pt;
+}
+.form .line > input{
+	height:40px;
+	width:300px;
+	border:1px solid gray;
+	font-size:12pt;
+}
+.form .line > input[type=file]{
+	border:none;
+	font-size:12pt;
+}
+.form textarea{
+	height:150px;
+	width:300px;
+	font-size:14pt;
+	border:1px solid gray;
+}
+.form input[type=submit]{
+	width:150px;
+	height:40px;
+	font-size:12pt;
+	margin-top:20px;
+}
+/*#signUp input[type=radio]{
+	float:left;
+}*/
+.line{
+	float:left;
+	margin-top:20px;
+}
+.line label{
+	margin-top:0px;
+}
+.helper{
+	color:#989898;
+	font-size:9pt;
+	display:none;
+}
+.clearfix:after{
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+
+}
+.messageBlock{
+	width:100%;
+	height:auto;
+	border:1px solid red;
+	background:#fad0d4;
+	font-size:11pt;
+	text-align:left;
+	display:none;
+}
+.messageBlock > ul li{
+	padding-right:10px;
+	margin-top:10px;
+}
+.required{
+	color:red;
+}
+#add_phone{
+	text-decoration:none;
+	font-size:18pt;
+	color:green;
+	display:inline-block;
+	margin-left:10px;
+}
+::-webkit-input-placeholder {color:#989898;margin:10px;}
+::-moz-placeholder          {color:#989898;margin:10px;}/* Firefox 19+ */
+:-moz-placeholder           {color:#989898;margin:10px;}/* Firefox 18- */
+:-ms-input-placeholder      {color:#989898;padding:10px;}
+
+.profileRow > .profileKey{
+	width:40%;
+	float:left;
+	color:gray;
+	text-align:left;
+	padding-bottom:10px;
+}
+.profileRow > .profileValue{
+	color:black;
+	width:40%;
+	float:right;
+	padding-right:50px;
+	text-align:left;
+	padding-bottom:10px;
+}
+.successMsg{
+	padding-left:15px;
+}
+.errorMsg{
+	padding-left:15px;
+}
