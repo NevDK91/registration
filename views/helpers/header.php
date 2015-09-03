@@ -1,6 +1,8 @@
 <?php
 require_once "cgi/functions.php";
 $actionName = _getActionName();
+if(empty($actionName))
+	$actionName = "main";
  ?>
 
 <!doctype html>

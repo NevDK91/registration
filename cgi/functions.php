@@ -73,6 +73,10 @@ function _getActionName(){
 
 }
 
+function dbConnect(){
+	return mysqli_connect( 'localhost','root','','forms');
+}
+
 
 ?>
 

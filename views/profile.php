@@ -11,12 +11,12 @@
 	<?php foreach($profile as $key => $value) {
 		if( ($key == "about") || ($key == "imagePath") )
 			continue;
-		if( empty($value) ) $value = "не указано";
+		if( empty($value) ) $value = $messages["profile"]["undefined"][$locale];
 		echo "<div class=profileRow><div class=profileKey>".$messages["profile"][$key][$locale].":</div><div class=profileValue>".$value."</div><div class=clearfix></div>";
 		}; 
 		?>
 	</div>
-	<div class="profileRow"><div class="profileKey"><?php echo $messages["profile"]["about"][$locale]; ?></div><div class="about"><?php echo ( !empty($profile["about"]) ? $profile["about"] : "не указано" ); ?></div></div>
+	<div class="profileRow"><div class="profileKey"><?php echo $messages["profile"]["about"][$locale]; ?></div><div class="about"><?php echo ( !empty($profile["about"]) ? $profile["about"] : $messages["profile"]["undefined"][$locale] ); ?></div></div>
 		
 	</section>
 

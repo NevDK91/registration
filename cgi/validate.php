@@ -58,9 +58,9 @@ if( ( isset( $_FILES['image']["name"] ) ) && ($_FILES['image']["name"] != "") ){
                 break;
                 case "sex":
                     if( $inputs[$i]["fieldValue"] == "male" )
-                      $inputs[$i]["fieldValue"] = "муж.";
+                      $inputs[$i]["fieldValue"] = $messages["profile"]["male"][$_SESSION["locale"] ];
                     elseif( $inputs[$i]["fieldValue"] == "female" )
-                      $inputs[$i]["fieldValue"] = "жен.";
+                      $inputs[$i]["fieldValue"] = $messages["profile"]["female"][$_SESSION["locale"] ];
                 break;    
           }          
       
@@ -69,7 +69,9 @@ if( ( isset( $_FILES['image']["name"] ) ) && ($_FILES['image']["name"] != "") ){
 
 if($formType == "signUp"){ // если форма - регистрации
      //Проверка email на уникальность
-  $mysqli = mysqli_connect( 'localhost','root','','forms');
+
+$mysqli = dbConnect();
+
   if (!$mysqli) { 
        printf("Невозможно подключиться к базе данных. Код ошибки: %s\n", mysqli_connect_error()); 
        exit; 

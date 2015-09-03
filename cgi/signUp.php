@@ -25,6 +25,8 @@ if($inputs == false){// Если есть невалидные поля - вер
 	echo header( 'Location: '.$_SERVER['HTTP_REFERER'], true, 301 );
 }
 else{// Если все поля валидны продолжить регистрацию
+
+$mysqli = dbConnect();	
 	
 $fields = [];
 
@@ -36,7 +38,7 @@ $fields = [];
 
 $imagePath = "";
 
-   if( (isset( $_FILES['image'] )) && (!empty($_FILES['image']['name']) ) && ($allValid == true) ) { // Загрузка файла если он существует
+   if( (isset( $_FILES['image'] )) && (!empty($_FILES['image']['name']) ) ) { // Загрузка файла если он существует
 
 		$uploaddir = '../uploads/';
 		$imagePath = $uploaddir . $_FILES['image']['name'];
@@ -59,7 +61,6 @@ $passwordHashed = password_hash($fields['password'], PASSWORD_DEFAULT);
 $confirmed = 0;
 
 	 
-$mysqli = mysqli_connect( 'localhost','root','','forms');     //(server, user, password, databaseName) База данных для запросов по умолчанию 
 
 	if (!$mysqli) { 
 	   printf("Невозможно подключиться к базе данных. Код ошибки: %s\n", mysqli_connect_error()); 

@@ -23,7 +23,7 @@ $email = $inputs[0]["fieldValue"];
 
 $password = $inputs[1]["fieldValue"];
 
-$mysqli = mysqli_connect( 'localhost','root','','forms');     /* (server, user, password, databaseName) База данных для запросов по умолчанию */
+$mysqli = dbConnect();
 
 	if (!$mysqli) { 
 	   printf("Невозможно подключиться к базе данных. Код ошибки: %s\n", mysqli_connect_error()); 

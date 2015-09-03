@@ -44,7 +44,7 @@ $messages = [
 						"helperAbout" => [ "ru" => "разрешены русские и английские буквы, пробелы, цифры и символы . ,", "en" => "russian and english letters, spaces, digits and symbols , . are allowed" ],
 						"helperImage" => [ "ru" => "разрешены форматы jpg, gif, png. максимальный размер - 9 mb", "en" => "allowed formats: jpeg, gif, png. Max size 9mb" ],
 						
-						"successSignUp" => [ "ru" => "Ваш аккаунт успешно зарегистрирован, но требует активации. На указанный вами почтовый ящик отправлено письмо с ссылкой, по которой нужно проследовать для активации аккаунта, спасибо за внимание!", "en" => "Your account has been successfully registered, but requires activation. To Your Mailbox sent a letter with a link, which you need to follow to validate your account, thank you for your attention!"],
+						"successSignUp" => [ "ru" => "Ваша учетная запись успешно зарегистрирована, но требует активации. На указанный вами почтовый ящик отправлено письмо с ссылкой, по которой нужно проследовать для активации учетной записи, спасибо за внимание!", "en" => "Your account has been successfully registered, but requires activation. To Your Mailbox sent a letter with a link, which you need to follow to validate your account, thank you for your attention!"],
 						
 
 		],
@@ -87,6 +87,11 @@ $messages = [
 
 						"shouldSignIn" => [ "ru" => "Авторизуйтесь, чтобы просматривать совй профиль.", "en" => "Sign in to view your profile."],
 
+						"undefined" => [ "ru" => "<span class=undefined>Не указано</span>", "en" => "<span class=undefined>Undefined</span>" ],
+
+						"male" => ["ru" => "муж.", "en" => "male"],
+
+						"female" => [ "ru" => "жен.", "en" => "female" ]
 						
 
 		],
@@ -130,7 +135,7 @@ $messages = [
 
 		"mail" => [
 					"title" => [ "ru" => "Активация учетной записи на ", "en" => "Activation account on " ],
-					"body" => [ "ru" => "Здравствуйте, активируйте, пожалуйста, аккаунт, перейдя по ссылке:", "en" => "Welcome, please activate your account by clicking on the link:" ],
+					"body" => [ "ru" => "Здравствуйте, активируйте, пожалуйста, аккаунт, перейдя по ссылке: ", "en" => "Welcome, please activate your account by clicking on the link:" ],
 		],
 		"confirm" => [
 					"already" => [ "ru" => "Учетная запись уже активирована!", "en" => "Account already activated" ],

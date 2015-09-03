@@ -1,12 +1,13 @@
 <?php
 session_start();
 require_once "messages.php";
+require_once "functions.php";
 
 if( (isset($_GET['code'])) && ( !empty($_GET['code'])) ){
 
 	$code = strip_tags( $_GET['code'] );
 
-	$mysqli = mysqli_connect( 'localhost','root','','forms');
+	$mysqli = dbConnect();
 
 	if (!$mysqli) { 
 	     printf("Невозможно подключиться к базе данных. Код ошибки: %s\n", mysqli_connect_error()); 

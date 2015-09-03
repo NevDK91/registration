@@ -14,7 +14,7 @@
 	}
 	$token = $_SESSION["token"];
 
-	if(!isset( $_GET["action"] ))
+	if(empty( $_GET["action"] ))
 		$_GET["action"] = "main";
 
 	switch( $_GET["action"] ) {

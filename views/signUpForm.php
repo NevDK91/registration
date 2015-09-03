@@ -58,6 +58,6 @@
 	<footer>
 	</footer>
 	<script type="text/javascript" src="js/main.js"></script>
-	<script src="..\\js\\messages.jsonp"></script>
+	<script src="../js/messages.jsonp"></script>
 </body>
 </html>
