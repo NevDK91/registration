@@ -41,4 +41,17 @@ function getProfile($id){
 	}
 
 }
+
+function _getLocale(){
+
+	if(!empty( $_GET["locale"] )){
+		$_SESSION["locale"] = $_GET["locale"];
+	}
+	elseif(( empty($_GET["locale"])) && (empty( $_SESSION["locale"] )) ){
+		$_SESSION["locale"] = "ru";			
+	}
+	return $_SESSION["locale"];
+ }
+
+
  ?>

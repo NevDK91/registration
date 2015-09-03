@@ -21,7 +21,7 @@ if( (isset($_GET['code'])) && ($_GET['code'] !== "") ){
 	echo $confirmed;
 
 	if($confirmed == 1){
-		$_SESSION["error"] = "<p class=successMsg>Аккаунт уже подтвержден!</p>";
+		$_SESSION["errors"] = "<p class=successMsg>Аккаунт уже подтвержден!</p>";
 	  	echo header( 'Location: http://'.$_SERVER['SERVER_NAME'], true, 301 );
 	}
 	else{
@@ -33,7 +33,7 @@ if( (isset($_GET['code'])) && ($_GET['code'] !== "") ){
 	  		echo header( 'Location: http://'.$_SERVER['SERVER_NAME'], true, 301 );
 	  	}	
 		else{ 
-			$_SESSION["error"] = "<p class=errorMsg>Ваш аккаунт не подтвержден вследствие программной ошибки, обратитесь к разработчику</p>";
+			$_SESSION["errors"] = "<p class=errorMsg>Ваш аккаунт не подтвержден вследствие программной ошибки, обратитесь к разработчику</p>";
 	  		echo header( 'Location: http://'.$_SERVER['SERVER_NAME'], true, 301 );
 		}	
 	}  

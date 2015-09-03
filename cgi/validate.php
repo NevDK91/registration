@@ -27,8 +27,8 @@ for($i = 0; $i <= count($inputs)-1; $i++){ // цикл по массиву по�
 }
 
 if( ( isset( $_FILES['image']["name"] ) ) && ($_FILES['image']["name"] != "") ){// если загружено изображение, добавление его типа и размера к полям для валидации
-  array_push( $inputs, ["fieldName" => "imageType", "fieldValue" => $_FILES["image"]["type"], "regExp" => "(image/jpeg|image/png|image/gif)", "required" => false ] );
-  array_push( $inputs, ["fieldName" => "imageSize", "fieldValue" => $_FILES["image"]["size"], "regExp" => "/^[0-9]{0,7}$/", "required" => false ] );
+  array_push( $inputs, ["fieldName" => "imageType", "fieldValue" => $_FILES["image"]["type"], "regExp" => "(image/jpeg|image/png|image/gif)", "required" => false, "fieldCaption" => "Тип изображения", "validMsg" => "Разрешены форматы: jpeg, gif, png"  ] );
+  array_push( $inputs, ["fieldName" => "imageSize", "fieldValue" => $_FILES["image"]["size"], "regExp" => "/^[0-9]{0,7}$/", "required" => false, "fieldCaption" => "Размер изображения", "validMsg" => "Максимальный размер - 9 мегабайт" ] );
 }
 
 

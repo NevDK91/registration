@@ -1,4 +1,5 @@
-<?php require_once "helpers/header.php" ?>
+<?php require_once "helpers/header.php";
+ ?>
 
 	</section>
 	<footer>

@@ -1,6 +1,10 @@
 <?php 
 session_start();
 include_once 'validate.php';
+include_once "messages.php";
+include_once "functions.php";
+
+$locale = _getLocale();
 
 if(!empty( $_POST["csrf_token"] )){
 	if( hash_equals($_POST["csrf_token"], $_SESSION["token"]) )
@@ -41,11 +45,11 @@ $mysqli = mysqli_connect( 'localhost','root','','forms');     /* (server, user, 
 
 	if( password_verify($password, $password_hash) ){
 		$_SESSION["signedUserId"] = $userId;
-		$_SESSION["success"] = "<p class=successMsg>Вы успешно авторизовались!</p>";
+		$_SESSION["success"] = "<p class=successMsg>".$messages["signIn"]["successSignIn"][$locale]."</p>";
 		echo header( 'Location: http://'.$_SERVER['SERVER_NAME']."/index.php?action=profile", true, 301 );
 	}
 	else{
-		$_SESSION["error"] = "<p class=errorMsg>Логин или пароль не верны!</p>";
+		$_SESSION["errors"] = "<p class=errorMsg>Логин или пароль не верны!</p>";
 		echo header( 'Location: '.$_SERVER['HTTP_REFERER'], true, 301 );
 	};
 

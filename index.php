@@ -3,6 +3,8 @@
 	require_once "cgi/functions.php"; // getProfile()
 	require_once "cgi/messages.php"; // локализация сообений
 
+	$locale = _getLocale();
+
 	if(empty( $_SESSION["token"] )){
 		if( function_exists( "mcrypt_create_iv" ) ){
 			$_SESSION["token"] = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_RANDOM));
@@ -16,15 +18,6 @@
 	if(!isset( $_GET["action"] ))
 		$_GET["action"] = "main";
 
-	if(!empty( $_GET["locale"] )){
-		$_SESSION["locale"] = $_GET["locale"];
-	}
-	elseif(( empty($_GET["locale"])) && (empty( $_SESSION["locale"] )) ){
-		$_SESSION["locale"] = "ru";			
-	}
-	$locale = $_SESSION["locale"];
-	var_dump($locale);
-
 	switch( $_GET["action"] ) {
 		case "signUp":
 			$page_title = $messages["pageTitleSignUp"][$locale];
@@ -32,7 +25,7 @@
 		break;
 		case "signIn":
 			if( ( isset($_SESSION["signedUserId"]) ) && ( !empty($_SESSION["signedUserId"]) ) ) {
-				$_SESSION["success"] = "<p class=successMsg>Вы уже авторизованы!</p>";
+				$_SESSION["success"] = "<p class=successMsg>".$messages["signIn"]["alreadySignIn"][$locale]."</p>";
 				echo header( 'Location: http://'.$_SERVER['SERVER_NAME']."/index.php?action=profile", true, 301 );
 			}
 			else{
@@ -42,7 +35,7 @@
 		break;
 		case "profile":
 			if( ( !isset($_SESSION["signedUserId"]) ) && ( empty($_SESSION["signedUserId"]) ) ) {
-				$_SESSION["error"] = "<p class=errorMsg>Авторизуйтесь, чтобы просматривать совй профиль!</p>";
+				$_SESSION["error"] = "<p class=errorMsg>".$messages["profile"]["shouldSignIn"][$locale]."</p>";
 				echo header( 'Location: http://'.$_SERVER['SERVER_NAME']."/index.php?action=signIn", true, 301 );
 				}
 				else{
@@ -53,6 +46,8 @@
 		break;
 		case "main":
 			$page_title = $messages["pageTitleMain"][$locale];
+			if( empty( $_SESSION["success"]) || (!isset( $_SESSION["success"] )) )
+			$_SESSION["success"] = "<p class=successMsg>".$messages["msgBlockGreetings"][$locale]."</p>";
 			require_once "views/main.php";
 		break;
 		default:

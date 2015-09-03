@@ -29,11 +29,11 @@
 					echo $_SESSION["success"];
 					$_SESSION["success"] = "";
 				}
-				elseif( (isset( $_SESSION["error"] )) && ( $_SESSION["error"] !== "" ) ){
+				elseif( (isset( $_SESSION["errors"] )) && ( !empty($_SESSION["errors"]) ) ){
 					echo "<script type='text/javascript'>var block = document.getElementById(\"messageBlock\"); 
 					block.style.display = \"block\"; block.style.border = \"1px solid red\";block.style.background = \"#fad0d4\";</script>";
-					echo $_SESSION["error"];
-					$_SESSION["error"] = "";
+					echo $_SESSION["errors"];
+					unset($_SESSION["errors"]);
 				}	
 				
 			 ?>
