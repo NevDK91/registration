@@ -74,7 +74,7 @@ function _getActionName(){
 }
 
 function dbConnect(){
-	return mysqli_connect( 'localhost','root','','forms');
+	return mysqli_connect( '54.158.247.34:3306','be46453c6afb01','39ac7007','heroku_85edc47e4ce03b1');
 }
 
 
