@@ -3,26 +3,29 @@ session_start();
 include_once 'validate.php';
 include_once 'mail.php';
 include_once 'messages.php';
+include_once 'functions.php';
 
 $inputs = array(
-		[ "fieldName" => "firstName", "fieldValue" => $_POST["firstName"], "regExp" => "/[a-zA-Zа-яА-я ]{2,100}$/", "required" => true, "fieldCaption" => "Имя", "validMsg" => "" ],
-		[ "fieldName" => "lastName", "fieldValue" => $_POST["lastName"], "regExp" => "/[a-zA-Zа-яА-я ]{2,100}$/", "required" => true, "fieldCaption" => "Фамилия", "validMsg" => ""  ],
-		[ "fieldName" => "email", "fieldValue" => $_POST["email"], "regExp" => "/^[A-z0-9._-]+@[A-z0-9.-]+\.[A-z]{2,4}$/", "required" => true, "fieldCaption" => "E-mail", "validMsg" => ""  ],
-		[ "fieldName" => "password", "fieldValue" => $_POST["password"], "regExp" => "/^[a-zA-Z0-9-_\.]{4,15}$/", "required" => true, "fieldCaption" => "Пароль", "validMsg" => "" ],
-		[ "fieldName" => "passConfirm", "fieldValue" => $_POST["passwordConfirmation"], "regExp" => "/^[a-zA-Z0-9-_\.]{4,15}$/", "required" => true, "fieldCaption" => "Подтверждение пароля", "validMsg" => ""  ],
-		[ "fieldName" => "birthYear", "fieldValue" => $_POST["birthYear"], "regExp" => "/^[0-9]{0,4}$/", "required" => false, "fieldCaption" => "Год рождения", "validMsg" => "Должно иметь длину 4 символа, диапазон 1920-2010"  ],
-		[ "fieldName" => "livingArea", "fieldValue" => $_POST["livingArea"], "regExp" => "/[a-zA-Zа-яА-Я0-9,. ]{0,100}$/", "required" => false, "fieldCaption" => "Место проживания", "validMsg" => "Должно состоять только из русских или английских букв, цифр и символов , . "  ],
-		[ "fieldName" => "phoneNumber", "fieldValue" => $_POST["phoneNumber"], "regExp" => "/^[0-9-.()+ ]{0,20}$/", "required" => false, "fieldCaption" => "Номер телефона", "validMsg" => "Должно состоять только из цифр и символов -.() "  ],
-		[ "fieldName" => "about", "fieldValue" => $_POST["about"], "regExp" => "/[a-zA-Zа-яА-Я0-9 ]{0,255}$/", "required" => false, "fieldCaption" => "Доп. информация", "validMsg" => "Должно состоять только из русских или английских букв, цифр и пробелов"  ],
+		[ "fieldName" => "firstName", "fieldValue" => $_POST["firstName"], "regExp" => "/[a-zA-Zа-яА-я ]{2,100}$/", "required" => true, "fieldCaption" => $messages["fieldCaption"]["firstName"][ $_SESSION["locale"] ], "validMsg" => $messages["validate"]["firstName"][ $_SESSION["locale"] ] ],
+		[ "fieldName" => "lastName", "fieldValue" => $_POST["lastName"], "regExp" => "/[a-zA-Zа-яА-я ]{2,100}$/", "required" => true, "fieldCaption" => $messages["fieldCaption"]["lastName"][ $_SESSION["locale"] ], "validMsg" => $messages["validate"]["lastName"][ $_SESSION["locale"] ]  ],
+		[ "fieldName" => "email", "fieldValue" => $_POST["email"], "regExp" => "/^[A-z0-9._-]+@[A-z0-9.-]+\.[A-z]{2,4}$/", "required" => true, "fieldCaption" => $messages["fieldCaption"]["email"][ $_SESSION["locale"] ], "validMsg" => $messages["validate"]["email"][ $_SESSION["locale"] ]  ],
+		[ "fieldName" => "password", "fieldValue" => $_POST["password"], "regExp" => "/^[a-zA-Z0-9-_\.]{4,15}$/", "required" => true, "fieldCaption" => $messages["fieldCaption"]["password"][ $_SESSION["locale"] ], "validMsg" => $messages["validate"]["password"][ $_SESSION["locale"] ] ],
+		[ "fieldName" => "passConfirm", "fieldValue" => $_POST["passwordConfirmation"], "regExp" => "/^[a-zA-Z0-9-_\.]{4,15}$/", "required" => true, "fieldCaption" => $messages["fieldCaption"]["passConfirm"][ $_SESSION["locale"] ], "validMsg" => $messages["validate"]["password"][ $_SESSION["locale"] ]  ],
+		[ "fieldName" => "birthYear", "fieldValue" => $_POST["birthYear"], "regExp" => "/^[0-9]{0,4}$/", "required" => false, "fieldCaption" => $messages["fieldCaption"]["birthYear"][ $_SESSION["locale"] ], "validMsg" => $messages["validate"]["birthYear"][ $_SESSION["locale"] ]  ],
+		[ "fieldName" => "livingArea", "fieldValue" => $_POST["livingArea"], "regExp" => "/[a-zA-Zа-яА-Я0-9,. ]{0,100}$/", "required" => false, "fieldCaption" => $messages["fieldCaption"]["livingArea"][ $_SESSION["locale"] ], "validMsg" => $messages["validate"]["livingArea"][ $_SESSION["locale"] ]  ],
+		[ "fieldName" => "phoneNumber", "fieldValue" => $_POST["phoneNumber"], "regExp" => "/^[0-9-.()+ ]{0,20}$/", "required" => false, "fieldCaption" => $messages["fieldCaption"]["phoneNumber"][ $_SESSION["locale"] ], "validMsg" => $messages["validate"]["phoneNumber"][ $_SESSION["locale"] ]  ],
+		[ "fieldName" => "about", "fieldValue" => $_POST["about"], "regExp" => "/[a-zA-Zа-яА-Я0-9 ]{0,255}$/", "required" => false, "fieldCaption" => $messages["fieldCaption"]["about"][ $_SESSION["locale"] ], "validMsg" => $messages["validate"]["about"][ $_SESSION["locale"] ]  ],
 		[ "fieldName" => "sex", "fieldValue" => $_POST["sex"], "regExp" => "/^[a-z]{0,6}$/", "required" => false, "fieldCaption" => "Пол", "validMsg" => ""  ] 
 	);
 
 
+$inputs = validate($inputs, "signUp", $messages);
 
-$inputs = validate($inputs, "signUp");
-
-var_dump( $inputs );
-
+if($inputs == false){// Если есть невалидные поля - вернуть в форму с ошибками
+	echo header( 'Location: '.$_SERVER['HTTP_REFERER'], true, 301 );
+}
+else{// Если все поля валидны продолжить регистрацию
+	
 $fields = [];
 
 	for ($i=0;$i < count($inputs); $i++){
@@ -33,12 +36,13 @@ $fields = [];
 
 $imagePath = "";
 
-   if( (isset( $_FILES['image'] )) && (!empty($_FILES['image']['name']) ) ) { // Загрузка файла если он существует
+   if( (isset( $_FILES['image'] )) && (!empty($_FILES['image']['name']) ) && ($allValid == true) ) { // Загрузка файла если он существует
 
 		$uploaddir = '../uploads/';
 		$imagePath = $uploaddir . $_FILES['image']['name'];
 		if (move_uploaded_file($_FILES['image']['tmp_name'], $imagePath)) {
 			print "File is valid, and was successfully uploaded.";
+
 		} 
 		else {
 			print "There some errors!";
@@ -46,8 +50,9 @@ $imagePath = "";
 
 	}
 	else{
-		$imagePath = 'uploads/default.png';
+		$imagePath = 'uploads/default.jpg';
 	}
+	
 
 $confirmCode = generateRandomString(40);	
 $passwordHashed = password_hash($fields['password'], PASSWORD_DEFAULT);
@@ -69,11 +74,11 @@ $mysqli = mysqli_connect( 'localhost','root','','forms');     //(server, user, p
 	if ($mysqli->query($sql) === TRUE) {
 	  
 
-	  $mailed = mailing($confirmCode, $fields["email"]);
+	  $mailed = mailing($confirmCode, $fields["email"], $messages["mail"]);
 
 	  if($mailed){
 
-	  	$_SESSION["success"] = "<p class=successMsg>Ваш аккаунт успешно зарегистрирован, но требует подтверждения. На указанный вами почтовый ящик отправлено письмо с ссылкой, по которой нужно проследовать для подтверждения аккаунта, спасибо за внимание!</p>";
+	  	$_SESSION["success"] = "<p class=successMsg>".$messages["signUp"]["successSignUp"][ $_SESSION["locale"] ]."</p>";
 	  	echo header( 'Location: http://'.$_SERVER['SERVER_NAME'], true, 301 );
 	  }
 
@@ -87,15 +92,7 @@ $mysqli = mysqli_connect( 'localhost','root','','forms');     //(server, user, p
 	mysqli_close($mysqli);
 
 
+}
 
-
-function array_push_assoc($array, $subArray){
-	 	array_push($array, $subArray);
-	 	return $array;
-	}
-
-	function generateRandomString($length = 15){
-    	return substr(sha1(rand()), 0, $length);
-	}
 
  ?>

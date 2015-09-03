@@ -14,6 +14,12 @@ h3{
 	padding-top:20px;
 	clear:both;
 }
+.additInf{
+	padding-top:20px!important;
+	display:block;
+	float:right;
+	margin-right:80px;
+}
 a{
 	text-decoration:none;
 	color:#3b77db;
@@ -60,11 +66,12 @@ a:hover{
 	float:left;
 	text-align:left;
 	padding-top:10px;
-	padding-left:10px;
+	padding-left:30px;
 	font-weight:100;
 	font-size:12pt;
 }
 .form .line > input{
+	margin-left:30px;
 	height:40px;
 	width:300px;
 	border:1px solid gray;
@@ -75,6 +82,7 @@ a:hover{
 	font-size:12pt;
 }
 .form textarea{
+	margin-left:30px;
 	height:150px;
 	width:300px;
 	font-size:14pt;
@@ -99,6 +107,8 @@ a:hover{
 .helper{
 	color:#989898;
 	font-size:9pt;
+	position:absolute;
+	width:180px;
 	display:none;
 }
 .clearfix:after{
@@ -167,4 +177,29 @@ a:hover{
 	word-wrap:break-word;
 	text-align:left;
 	margin-left:145px;
+}
+a.signOut{
+	margin-bottom:10px;
+	display:block;
+}
+header{
+	width:600px;
+	margin:auto;
+	display:block;
+	position:relative;
+}
+header h2{
+	display:block;
+	position:relative;
+}
+.languages{
+margin-top:-45px;
+margin-bottom:10px;
+margin-left:610px;
+width:100px;
+height:20px;
+}
+.languages > a{
+	cursor:pointer;
+	font-size:13pt;
 }

@@ -1,7 +1,8 @@
 <?php
 session_start();
+require_once "messages.php";
 
-if( (isset($_GET['code'])) && ($_GET['code'] !== "") ){
+if( (isset($_GET['code'])) && ( !empty($_GET['code'])) ){
 
 	$code = strip_tags( $_GET['code'] );
 
@@ -18,10 +19,8 @@ if( (isset($_GET['code'])) && ($_GET['code'] !== "") ){
 	while($row = $result->fetch_assoc()) {
 		$confirmed = $row["confirmed"];
 	}
-	echo $confirmed;
-
 	if($confirmed == 1){
-		$_SESSION["errors"] = "<p class=successMsg>Аккаунт уже подтвержден!</p>";
+		$_SESSION["success"] = "<p class=successMsg>".$messages["confirm"]["already"][ $_SESSION["locale"] ]."</p>";
 	  	echo header( 'Location: http://'.$_SERVER['SERVER_NAME'], true, 301 );
 	}
 	else{
@@ -29,11 +28,11 @@ if( (isset($_GET['code'])) && ($_GET['code'] !== "") ){
 		$result = $mysqli->query($sql);
 		  // Performs the $sql query on the server to create the database
 		if($result){
-			$_SESSION["success"] = "<p class=successMsg>Ваш аккаунт успешно подтвержден! Теперь вы можете <a href=/index.php?action=signIn>авторизоваться</a> и посмотреть свой профиль</p>";
+			$_SESSION["success"] = "<p class=successMsg>".$messages["confirm"]["success"][ $_SESSION["locale"] ]."</p>";
 	  		echo header( 'Location: http://'.$_SERVER['SERVER_NAME'], true, 301 );
 	  	}	
 		else{ 
-			$_SESSION["errors"] = "<p class=errorMsg>Ваш аккаунт не подтвержден вследствие программной ошибки, обратитесь к разработчику</p>";
+			$_SESSION["errors"] = "<p class=errorMsg>".$messages["confirm"]["error"][ $_SESSION["locale"] ]."</p>";
 	  		echo header( 'Location: http://'.$_SERVER['SERVER_NAME'], true, 301 );
 		}	
 	}  
@@ -43,7 +42,7 @@ if( (isset($_GET['code'])) && ($_GET['code'] !== "") ){
 }
 
 else{
-		$_SESSION["error"] = "<p>Код не указан! Ссылка предназначена только для подтверждения почтового ящика!</p>";
+		$_SESSION["error"] = "<p class=errorMsg>".$messages["confirm"]["emptyCode"][ $_SESSION["locale"] ]."</p>";
 	  	echo header( 'Location: http://'.$_SERVER['SERVER_NAME'], true, 301 );
 	}
 

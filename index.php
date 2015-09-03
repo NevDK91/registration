@@ -2,7 +2,6 @@
 	session_start();
 	require_once "cgi/functions.php"; // getProfile()
 	require_once "cgi/messages.php"; // локализация сообений
-
 	$locale = _getLocale();
 
 	if(empty( $_SESSION["token"] )){
@@ -35,7 +34,7 @@
 		break;
 		case "profile":
 			if( ( !isset($_SESSION["signedUserId"]) ) && ( empty($_SESSION["signedUserId"]) ) ) {
-				$_SESSION["error"] = "<p class=errorMsg>".$messages["profile"]["shouldSignIn"][$locale]."</p>";
+				$_SESSION["errors"] = "<p class=errorMsg>".$messages["profile"]["shouldSignIn"][$locale]."</p>";
 				echo header( 'Location: http://'.$_SERVER['SERVER_NAME']."/index.php?action=signIn", true, 301 );
 				}
 				else{
@@ -54,3 +53,4 @@
 			require_once "views/main.php";
 	}			
  ?>
+ 

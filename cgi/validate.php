@@ -1,6 +1,6 @@
 <?php
 
-function validate ($inputs, $formType) { // Первый параметр - массив с полями формы и вспомогательными данными, 
+function validate ($inputs, $formType, $messages) { // Первый параметр - массив с полями формы и вспомогательными данными, 
   //второй - тип формы - регистрация или авторизация, при регистрации нужно выдавать ошибку об уже сущ e-mail
 
   
@@ -27,19 +27,19 @@ for($i = 0; $i <= count($inputs)-1; $i++){ // цикл по массиву по�
 }
 
 if( ( isset( $_FILES['image']["name"] ) ) && ($_FILES['image']["name"] != "") ){// если загружено изображение, добавление его типа и размера к полям для валидации
-  array_push( $inputs, ["fieldName" => "imageType", "fieldValue" => $_FILES["image"]["type"], "regExp" => "(image/jpeg|image/png|image/gif)", "required" => false, "fieldCaption" => "Тип изображения", "validMsg" => "Разрешены форматы: jpeg, gif, png"  ] );
-  array_push( $inputs, ["fieldName" => "imageSize", "fieldValue" => $_FILES["image"]["size"], "regExp" => "/^[0-9]{0,7}$/", "required" => false, "fieldCaption" => "Размер изображения", "validMsg" => "Максимальный размер - 9 мегабайт" ] );
+  array_push( $inputs, ["fieldName" => "imageType", "fieldValue" => $_FILES["image"]["type"], "regExp" => "(image/jpeg|image/png|image/gif)", "required" => false, "fieldCaption" => $messages["fieldCaption"]["imageType"][$_SESSION["locale"] ], "validMsg" => $messages["validate"]["imageType"][$_SESSION["locale"] ]  ] );
+  array_push( $inputs, ["fieldName" => "imageSize", "fieldValue" => $_FILES["image"]["size"], "regExp" => "/^[0-9]{0,7}$/", "required" => false, "fieldCaption" => $messages["fieldCaption"]["imageSize"][$_SESSION["locale"] ], "validMsg" => $messages["validate"]["imageSize"][$_SESSION["locale"] ] ] );
 }
 
 
    for($i = 0; $i <= count($inputs)-1; $i++){//перебор массива полей формы, валидация регулярными выражениями
 
           if( ($inputs[$i]["required"] == "true") && ( strlen($inputs[$i]["fieldValue"]) == 0 )  ){//если поле пустое, добавлене в переменную информации о соотв ошибке
-            $_SESSION["errors"].= "<li>Поле: ". $inputs[$i]["fieldName"] . " обязательно к заполнению!</li>";
+            $_SESSION["errors"].= "<li>". $messages["validate"]["field"][ $_SESSION["locale"] ] . $inputs[$i]["fieldName"] . " обязательно к заполнению!</li>";
             $allValid = false;
           }
           if (!preg_match( $inputs[$i]["regExp"], $inputs[$i]["fieldValue"]) ) { // если валидация поля по шаблону не прошла, добавление в переменную информацию о соответствующей ошибке
-              $_SESSION["errors"].= "<li>Некорректное поле: ".$inputs[$i]["fieldCaption"].". ".$inputs[$i]["validMsg"]."</li>";
+              $_SESSION["errors"].= "<li>" . $messages["validate"]["incorrField"][$_SESSION["locale"] ] . $inputs[$i]["fieldCaption"].". ".$inputs[$i]["validMsg"]."</li>";
               $allValid = false;
           }
           switch ( $inputs[$i]["fieldName"] ){
@@ -49,7 +49,7 @@ if( ( isset( $_FILES['image']["name"] ) ) && ($_FILES['image']["name"] != "") ){
                 case "passConfirm":
                     $passConfirm = $inputs[$i]["fieldValue"];
                     if( $password !== $passConfirm){
-                        $_SESSION["errors"].= "<li>Поля: Пароль и Подтверждающий пароль не совпадают!</li>";
+                        $_SESSION["errors"].= "<li>".$messages["validate"]["passMisMatch"][ $_SESSION["locale"] ]."</li>";
                         $allValid = false;
                     }
                 break;
@@ -59,7 +59,7 @@ if( ( isset( $_FILES['image']["name"] ) ) && ($_FILES['image']["name"] != "") ){
                 case "sex":
                     if( $inputs[$i]["fieldValue"] == "male" )
                       $inputs[$i]["fieldValue"] = "муж.";
-                    else
+                    elseif( $inputs[$i]["fieldValue"] == "female" )
                       $inputs[$i]["fieldValue"] = "жен.";
                 break;    
           }          
@@ -80,7 +80,7 @@ if($formType == "signUp"){ // если форма - регистрации
     // Performs the $sql query on the server to create the database
 
       if ($result->num_rows > 0) {
-        $_SESSION["errors"].= "<li>пользователь с таким E-mail'ом уже зарегистрирован!</li>";
+        $_SESSION["errors"].= "<li>".$messages["validate"]["emailExists"][ $_SESSION["locale"] ]."</li>";
         $allValid = false;
       }
     
@@ -90,10 +90,12 @@ if($formType == "signUp"){ // если форма - регистрации
 
 $_SESSION["errors"] .= "</ul>";
 
-    if($allValid == false)
-      return header( 'Location: '.$_SERVER['HTTP_REFERER'], true, 301 );
-
-    return $inputs; 
+    if($allValid == false) {
+      return false;
+    }
+    else {
+      return $inputs;
+    }
 }
           
       

@@ -1,0 +1,91 @@
+localeMessages = {
+
+	"field" : { "ru" : "Поле: ", "en" : "Field: " },
+
+	"incorrect" : { "ru" : " не корректно. ", "en" : " is incorrect " },
+
+	"passMisMatch" : { "ru" : "Поля: Пароль и Подтверждающий пароль не совпадают!", "en" : "Fields: Password and Password Confirmation do not match!" },
+
+	"fieldCaption":{
+				"firstName":{
+						"ru" : "Имя",
+						"en" : "First name"
+				},
+				"lastName":{
+						"ru" : "Фамилия",
+						"en" : "Last name"
+				},
+				"email":{
+						"ru" : "E-mail",
+						"en" : "E-mail"
+				},
+				"password":{
+						"ru" : "Пароль",
+						"en" : "Password"
+				},
+				"passConfirm":{
+						"ru" : "Подтверждающий пароль",
+						"en" : "Confirmation password"
+				},
+				"birthYear":{
+						"ru" : "Год рождения",
+						"en" : "Year of birth"
+				},
+				"livingArea":{
+						"ru" : "Место проживания",
+						"en" : "Residence place"
+				},
+				"phoneNumber":{
+						"ru" : "Номер телефона",
+						"en" : "Phone number"
+				},
+				"about":{
+						"ru" : "Дополнительная информация",
+						"en" : "Additional information"
+				},
+
+
+		},
+		"validMsg":{
+				"firstName":{
+						"ru" : "Должно иметь длину больше 2 символов, содержать только русские и английские буквы!",
+						"en" : "It should have a length of more than 2 characters, contain only Russian and English letters!"
+				},
+				"lastName":{
+						"ru" : "Должно иметь длину больше 2 символов, содержать только русские и английские буквы!",
+						"en" : "It should have a length of more than 2 characters, contain only Russian and English letters!"
+				},
+				"email":{
+						"ru" : "Должно содержать только английские буквы, символы @ . ",
+						"en" : "It should contain only English letters, @ and . symbols."
+				},
+				"password":{
+						"ru" : "Должно иметь длину от 5 символов, содержать только английские буквы и цифры",
+						"en" : "It should have a length more 5 characters, contains only English letters and digits"
+				},
+				"passConfirm":{
+						"ru" : "Должно иметь длину от 5 символов, содержать только английские буквы и цифры",
+						"en" : "It should have a length more 5 characters, contains only English letters and digits"
+				},
+				"birthYear":{
+						"ru" : "Должно иметь длину 4 символа, диапазон 1920-2010",
+						"en" : "Should have a length of 4 symbols, the range of 1920-2010"
+				},
+				"livingArea":{
+						"ru" : "Должно состоять только из русских или английских букв, цифр и символов , . ",
+						"en" : "It should consist only of Russian or English letters, numbers and symbols."
+				},
+				"phoneNumber":{
+						"ru" : "Должно состоять только из цифр и символов -.() ",
+						"en" : "It should consist only of numbers and symbols -. ()"
+				},
+				"about":{
+						"ru" : "Должно состоять только из русских или английских букв, цифр и пробелов",
+						"en" : "It should consist only of Russian or English letters, numbers and spaces"
+				},
+
+
+		},
+	
+
+}

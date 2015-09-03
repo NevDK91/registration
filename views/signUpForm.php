@@ -22,7 +22,7 @@
 				<label for="passwordConfirmation"> <?php echo $messages["signUp"]["labelPassConfirm"][$locale]; ?> <span class="required"> *</span><div class="helper" id="for_passwordConfirmation"><?php echo $messages["signUp"]["helperPassword"][$locale]; ?></div></label>
 				<input type="passowrd" name="passwordConfirmation" onfocus="showHelper(this,this.id)" required id="passwordConfirmation"  />
 			</div>
-			<h3> <?php echo $messages["signUp"]["titleAdditional"][$locale]; ?> </h3>
+			<h3 class="additInf"> <?php echo $messages["signUp"]["titleAdditional"][$locale]; ?> </h3>
 			<div class="line">
 				<label for="birthYear"> <?php echo $messages["signUp"]["labelBirthYear"][$locale]; ?> <div class="helper" id="for_birthYear"><?php echo $messages["signUp"]["helperBirthYear"][$locale]; ?></div></label>
 				<input type="number" min="1920" max="2010" step="1" name="birthYear" id="birthYear" onfocus="showHelper(this,this.id)" />
@@ -58,5 +58,6 @@
 	<footer>
 	</footer>
 	<script type="text/javascript" src="js/main.js"></script>
+	<script src="..\\js\\messages.jsonp"></script>
 </body>
 </html>

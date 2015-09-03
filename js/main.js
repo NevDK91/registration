@@ -5,7 +5,7 @@ function showHelper(input,id){
         };
     };
 
-function validate(form, validatable){
+function validate(form, validatable, localeMessages){
     var message = "<ul>";
             var allValid = true;
 
@@ -18,7 +18,7 @@ function validate(form, validatable){
                             console.log(field["fieldCaption"]+": " +true);
                         else{ // если хоть одно поле не валидно, переменная allValid, пропускающая отправку формы при true, становится false, т.е. форма не отправится
                             allValid = false;
-                            message += "<li>Поле: "+field["fieldCaption"]+" не корректно. "+field["validMsg"]+"</li>";// добавление списку ошибок, текущей
+                            message += "<li>"+localeMessages["field"][ locale ]+field["fieldCaption"]+localeMessages["incorrect"][ locale ]+field["validMsg"]+"</li>";// добавление списку ошибок, текущей
                             console.log(field["fieldCaption"]+": " +false);
                         }
 
@@ -30,7 +30,7 @@ function validate(form, validatable){
                                 passConfirm = field["value"]
                                 if(password !== passConfirm){
                                     allValid = false;
-                                    message += "<li>Поля: Пароль и Подтверждающий пароль не совпадают!</li>";// добавление списку ошибок, текущей
+                                    message += "<li>"+localeMessages["passMisMatch"][ locale ]+"</li>";// добавление списку ошибок, текущей
                                     console.log("пароль !== подтв пароль : " +false);
                                 }
                         };       
@@ -50,6 +50,9 @@ function validate(form, validatable){
 };     
 
 window.onload = function(){
+    htmlTag = document.getElementsByTagName("html");
+    locale = htmlTag[0].attributes.lang.value;
+    console.log( locale );
 
     var form = document.forms[0];
 
@@ -61,73 +64,73 @@ window.onload = function(){
             var validatableSignUp = [// Описание всх полей формы и данных для валидации в виде json
             {
                 fieldName: "firstName",
-                fieldCaption: "Имя",
+                fieldCaption: localeMessages["fieldCaption"]["firstName"][ locale ],
                 value:  form.elements.firstName.value,
                 regExp: /[a-zA-Zа-яА-я ]{2,100}$/,
-                validMsg: "Должно иметь длину больше 2 символов, содержать только русские и английские буквы!"
+                validMsg: localeMessages["validMsg"]["firstName"][ locale ]
             },
              {
                 fieldName: "lastName",
-                fieldCaption: "Фамилия",
+                fieldCaption: localeMessages["fieldCaption"]["lastName"][ locale ],
                 value:  form.elements.lastName.value,
                 regExp: /[a-zA-Zа-яА-я ]{2,100}$/,
-                 validMsg: "Должно иметь длину больше 2 символов, содержать только русские и английские буквы!"
+                 validMsg: localeMessages["validMsg"]["lastName"][ locale ]
             },
              {
                 fieldName: "email",
-                fieldCaption: "E-mail",
+                fieldCaption: localeMessages["fieldCaption"]["email"][ locale ],
                 value:  form.elements.email.value,
                 regExp: /^[A-z0-9._-]+@[A-z0-9.-]+\.[A-z]{2,4}$/,
-                 validMsg: "Должно содержать только английские буквы, символы @ . "
+                 validMsg: localeMessages["validMsg"]["email"][ locale ]
             },
              {
                 fieldName: "password",
-                fieldCaption: "Пароль",
+                fieldCaption: localeMessages["fieldCaption"]["password"][ locale ],
                 value:  form.elements.password.value,
                 regExp: /^[a-zA-Z0-9-_\.]{5,15}$/,
-                validMsg: "Должно иметь длину от 5 символов, начинаться с английской буквы и содержать только английские буквы!"
+                validMsg: localeMessages["validMsg"]["password"][ locale ]
             },
              {
                 fieldName: "passConfirm",
-                fieldCaption: "Подтверждающий пароль",
+                fieldCaption: localeMessages["fieldCaption"]["passConfirm"][ locale ],
                 value:  form.elements.passwordConfirmation.value,
                 regExp: /^[a-zA-Z0-9-_\.]{5,15}$/,
-                validMsg: "Должно иметь длину от 5 символов, начинаться с английской буквы и содержать только английские буквы!"
+                validMsg: localeMessages["validMsg"]["passConfirm"][ locale ]
             },
              {
                 fieldName: "birthYear",
-                fieldCaption: "Год рождения",
+                fieldCaption: localeMessages["fieldCaption"]["birthYear"][ locale ],
                 value:  form.elements.birthYear.value,
                 regExp: /^[0-9]{0,4}$/,
-                validMsg: "Должно иметь длину от 4 символа, диапазон 1920-2010"
+                validMsg: localeMessages["validMsg"]["birthYear"][ locale ]
             },
              {
                 fieldName: "livingArea",
-                fieldCaption: "Место проживания",
+                fieldCaption: localeMessages["fieldCaption"]["livingArea"][ locale ],
                 value:  form.elements.livingArea.value,
                 regExp: /^[a-zA-Zа-яА-Я0-9,. ]{0,100}$/,
-                validMsg: "Должно состоять только из русских или английских букв, цифр и символов , . "
+                validMsg: localeMessages["validMsg"]["livingArea"][ locale ]
             }
             ,
              {
                 fieldName: "phoneNumber",
-                fieldCaption: "Мобильный телефон",
+                fieldCaption: localeMessages["fieldCaption"]["phoneNumber"][ locale ],
                 value:  form.elements.phoneNumber.value,
                 regExp: /^[0-9-.()+ ]{0,20}$/,
-                validMsg: "Должно состоять только из цифр и символов '-.() ' "
+                validMsg: localeMessages["validMsg"]["phoneNumber"][ locale ]
             }
             ,
              {
                 fieldName: "about",
-                fieldCaption: "О себе",
+                fieldCaption: localeMessages["fieldCaption"]["about"][ locale ],
                 value:  form.elements.about.value,
                 regExp: /^[a-zA-Zа-яА-Я0-9,. ]{0,255}$/,
-                validMsg: "Должно состоять только из русских или английских букв, цифр и пробелов"
+                validMsg: localeMessages["validMsg"]["about"][ locale ]
             }
 
         ];
 
-          validate(form, validatableSignUp);  
+          validate(form, validatableSignUp, localeMessages);  
 
         }; //end formSignUp.onsubmit
        }// endif(form.name == signUp) 
@@ -141,22 +144,22 @@ window.onload = function(){
             var validatableSignIn = [// Описание всх полей формы и данных для валидации в виде json
              {
                 fieldName: "email",
-                fieldCaption: "E-mail",
+                fieldCaption: localeMessages["fieldCaption"]["email"][ locale ],
                 value:  form.elements.email.value,
                 regExp: /^[A-z0-9._-]+@[A-z0-9.-]+\.[A-z]{2,4}$/,
-                 validMsg: "Должно содержать только английские буквы, символы @ . "
+                 validMsg: localeMessages["validMsg"]["email"][ locale ]
             },
              {
                 fieldName: "password",
-                fieldCaption: "Пароль",
+                fieldCaption: localeMessages["fieldCaption"]["password"][ locale ],
                 value:  form.elements.password.value,
                 regExp: /^[a-zA-Z0-9-_\.]{5,15}$/,
-                validMsg: "Должно иметь длину от 5 символов, начинаться с английской буквы и содержать только английские буквы!"
+                validMsg: localeMessages["validMsg"]["password"][ locale ]
             }
 
         ];
 
-          validate(form, validatableSignIn);  
+          validate(form, validatableSignIn, localeMessages);  
 
         };
     }// endif(form.name == signIn)

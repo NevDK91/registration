@@ -32,25 +32,34 @@ $mysqli = mysqli_connect( 'localhost','root','','forms');     /* (server, user, 
 
 	$mysqli->query( "SET CHARSET 'utf8'" );
 
-	$sql = "select id,password from users where email='$email' ";
+	$sql = "select id,password,confirmed from users where email='$email' ";
 
 	$res = $mysqli->query($sql);
 
 	while($row = $res->fetch_assoc()) {
 		$password_hash = $row["password"];
 		$userId = $row["id"];
+		$confirmed = $row["confirmed"];
 	}
 /* Закрываем соединение */ 
 	mysqli_close($mysqli);
 
 	if( password_verify($password, $password_hash) ){
-		$_SESSION["signedUserId"] = $userId;
-		$_SESSION["success"] = "<p class=successMsg>".$messages["signIn"]["successSignIn"][$locale]."</p>";
-		echo header( 'Location: http://'.$_SERVER['SERVER_NAME']."/index.php?action=profile", true, 301 );
+		if($confirmed == 0){
+				$_SESSION["errors"] = "<p class=errorMsg>".$messages["signIn"]["notConfirmed"][ $_SESSION["locale"] ]."</p>";
+				echo header( 'Location: '.$_SERVER['HTTP_REFERER'], true, 301 );
+		}
+		else{
+				$_SESSION["signedUserId"] = $userId;
+				$_SESSION["success"] = "<p class=successMsg>".$messages["signIn"]["successSignIn"][$locale]."</p>";
+				echo header( 'Location: http://'.$_SERVER['SERVER_NAME']."/index.php?action=profile", true, 301 );
+			
+		}
+			
 	}
 	else{
-		$_SESSION["errors"] = "<p class=errorMsg>Логин или пароль не верны!</p>";
-		echo header( 'Location: '.$_SERVER['HTTP_REFERER'], true, 301 );
+			$_SESSION["errors"] = "<p class=errorMsg>".$messages["signIn"]["wrongEmailOrPass"][ $_SESSION["locale"] ]."</p>";
+			echo header( 'Location: '.$_SERVER['HTTP_REFERER'], true, 301 );
 	};
 
 

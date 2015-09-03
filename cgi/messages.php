@@ -44,6 +44,7 @@ $messages = [
 						"helperAbout" => [ "ru" => "разрешены русские и английские буквы, пробелы, цифры и символы . ,", "en" => "russian and english letters, spaces, digits and symbols , . are allowed" ],
 						"helperImage" => [ "ru" => "разрешены форматы jpg, gif, png. максимальный размер - 9 mb", "en" => "allowed formats: jpeg, gif, png. Max size 9mb" ],
 						
+						"successSignUp" => [ "ru" => "Ваш аккаунт успешно зарегистрирован, но требует активации. На указанный вами почтовый ящик отправлено письмо с ссылкой, по которой нужно проследовать для активации аккаунта, спасибо за внимание!", "en" => "Your account has been successfully registered, but requires activation. To Your Mailbox sent a letter with a link, which you need to follow to validate your account, thank you for your attention!"],
 						
 
 		],
@@ -60,7 +61,8 @@ $messages = [
 						
 						"successSignIn" => [ "ru" => "Вы успешно авторизовались!", "en" => "You are successfully signed in!"],
 						"alreadySignIn" => [ "ru" => "Вы уже авторизованы!", "en" => "You are already signed in!"],
-						
+						"wrongEmailOrPass" => [ "ru" => "E-mail или пароль не верны!", "en" => "E-mail or Password is incorrect!"],
+						"notConfirmed" => [ "ru" => "Чтобы пользоваться новой учетной записью, активировать её, пройдя по ссылке в письме, которое мы отправили на указанный вами при регистрации почтовый ящик, Спасибо за внимание!", "en" => "To use the new account, activate it by clicking on the link in the email that we have sent to your registered mailbox, Thank you!"],
 
 		],
 
@@ -81,7 +83,7 @@ $messages = [
 						"about" => [ "ru" => "Дополнительная информация", "en" => "Additional information:"],
 						"sex" => [ "ru" => "Пол", "en" => "Sex"],
 
-						"signOutLink" => [ "ru" => "Выйти", "en" => "Sign Out"],
+						"signOutLink" => [ "ru" => "Выйти из учетной записи", "en" => "Sign Out"],
 
 						"shouldSignIn" => [ "ru" => "Авторизуйтесь, чтобы просматривать совй профиль.", "en" => "Sign in to view your profile."],
 
@@ -99,18 +101,46 @@ $messages = [
 						"livingArea" => [ "ru" => "Должно состоять только из русских или английских букв, цифр и символов , . ", "en" => "It should consist only of Russian or English letters, numbers and symbols."],
 						"phoneNumber" => [ "ru" => "Должно состоять только из цифр и символов -.() ", "en" => "It should consist only of numbers and symbols -. ()"],
 						"about" => [ "ru" => "Должно состоять только из русских или английских букв, цифр и пробелов", "en" => "It should consist only of Russian or English letters, numbers and spaces"],
-						"sex" => [ "ru" => "Пол", "en" => "Sex"],
+						"imageType" => [ "ru" => "Разрешены форматы: jpeg, gif, png", "en" => "allowed formats: jpeg, gif, png"],
+						"imageSize" => [ "ru" => "Максимальный размер 9 мб", "en" => "Max size 9mb"],
 
-						"signOutLink" => [ "ru" => "Выйти", "en" => "Sign Out"],
-
-						"shouldSignIn" => [ "ru" => "Авторизуйтесь, чтобы просматривать совй профиль.", "en" => "Sign in to view your profile."],
-
+						"incorrField" => [ "ru" => "Некорректное поле: ", "en" => "Incorrect field: "],
+						"passMisMatch" => [ "ru" => "Поля: Пароль и Подтверждающий пароль не совпадают!", "en" => "Fields: Password and Password Confirmation do not match!"],
+						"required" => [ "ru" => " обязательно к заполнению!", "en" => " required!"],
+						"field" =>  [ "ru" => "Поле: ", "en" => "Field: " ],
+						"emailExists" =>  [ "ru" => "Пользователь с таким E-mail'ом уже зарегистрирован!", "en" => "User with same E-mail already registered!" ],
 						
+		],
 
+		"fieldCaption" => [
+						"firstName" => [ "ru" => "Имя", "en" => "First name "],
+						"lastName" => [ "ru" => "Фамилия", "en" => "Last name"],
+						"email" => [ "ru" => "E-mail", "en" => "E-mail"],
+						"password" => [ "ru" => "Пароль ", "en" => "Password"],
+						"passConfirm" => [ "ru" => "Подтверждение пароля ", "en" => "Password confirmation"],
+						"birthYear" => [ "ru" => "Год рождения", "en" => "Year of birth"],
+						"livingArea" => [ "ru" => "Место проживания", "en" => "Residence place"],
+						"phoneNumber" => [ "ru" => "Номер телефона", "en" => "Phone number"],
+						"about" => [ "ru" => "Дополнительная информация", "en" => "Additional information"],
+						"image" => [ "ru" => "Изображение", "en" => "Image"],
+						"imageType" => [ "ru" => "Тип изображения", "en" => "Image type"],
+						"imageSize" => [ "ru" => "Размер изображения", "en" => "Image size"],
+
+		],
+
+		"mail" => [
+					"title" => [ "ru" => "Активация учетной записи на ", "en" => "Activation account on " ],
+					"body" => [ "ru" => "Здравствуйте, активируйте, пожалуйста, аккаунт, перейдя по ссылке:", "en" => "Welcome, please activate your account by clicking on the link:" ],
+		],
+		"confirm" => [
+					"already" => [ "ru" => "Учетная запись уже активирована!", "en" => "Account already activated" ],
+					"success" => [ "ru" => "Ваша учетная запись успешно подтверждена! Теперь вы можете <a href=/index.php?action=signIn>авторизоваться</a> и посмотреть свой профиль", "en" => "Your account has been successfully confirmed! Now you can <a href=/index.php?action=signIn> Sign in </a> and see your profile" ],
+					"error" => [ "ru" => "Ваша учетная запись не подтверждена вследствие программной ошибки, обратитесь к разработчику", "en" => "Your account has not been confirmed as a result of a programming error, contact the developer" ],
+					"emptyCode" => [ "ru" => "Код не указан! Ссылка предназначена только для подтверждения почтового ящика!", "en" => "Code Unknown! Link is only intended to confirm the mailbox!" ],
+		
 		],	  
 
 ];
 
-/*echo "myssages.php";*/
 
  ?>
