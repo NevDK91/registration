@@ -1,9 +1,11 @@
 <?php
 session_start();
 include_once 'validate.php';
-include_once 'mail.php';
 include_once 'messages.php';
 include_once 'functions.php';
+require 'vendor/autoload.php';
+use Mailgun\Mailgun;
+include_once 'mail.php';
 
 $inputs = array(
 		[ "fieldName" => "firstName", "fieldValue" => $_POST["firstName"], "regExp" => "/[a-zA-Zа-яА-я ]{2,100}$/", "required" => true, "fieldCaption" => $messages["fieldCaption"]["firstName"][ $_SESSION["locale"] ], "validMsg" => $messages["validate"]["firstName"][ $_SESSION["locale"] ] ],
