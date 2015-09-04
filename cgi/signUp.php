@@ -80,11 +80,12 @@ $confirmed = 0;
 	  $mailed = mailing($confirmCode, $fields["email"], $messages["mail"]);
 	  var_dump($mailed);
 
-	  if($mailed){
+	  if($mailed == true){
 
 	  	$_SESSION["success"] = "<p class=successMsg>".$messages["signUp"]["successSignUp"][ $_SESSION["locale"] ]."</p>";
 	  	echo header( 'Location: http://'.$_SERVER['SERVER_NAME'], true, 301 );
 	  }
+
 
 	}
 	else {
