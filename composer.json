@@ -1,7 +1,7 @@
 {
     "require": {
-        "pear-pear/pear": "1.9.4",
-        "pear-pear/Mail_Mime": "1.8.7"
+        "pear-pear/pear": "*",
+        "pear-pear/Mail_Mime": "*"
     },
     "repositories": [
         {
