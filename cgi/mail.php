@@ -1,9 +1,9 @@
 <?php
 
-require '../vendor/autoload.php';
-use Mailgun\Mailgun;
-
 function mailing($confirmCode, $recip, $messages){
+ require '../vendor/autoload.php';
+use Mailgun\Mailgun;
+       
 
         $subject = $messages["title"][ $_SESSION["locale"] ].$_SERVER['SERVER_NAME'];
         $text = $messages["body"][ $_SESSION["locale"] ]."http://".$_SERVER['SERVER_NAME']."/cgi/confirmation.php?code=".$confirmCode;
