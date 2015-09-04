@@ -3,8 +3,6 @@ session_start();
 include_once 'validate.php';
 include_once 'messages.php';
 include_once 'functions.php';
-require 'vendor/autoload.php';
-use Mailgun\Mailgun;
 include_once 'mail.php';
 
 $inputs = array(
@@ -22,7 +20,8 @@ $inputs = array(
 
 
 $inputs = validate($inputs, "signUp", $messages);
-
+var_dump($inputs);
+/*
 if($inputs == false){// Если есть невалидные поля - вернуть в форму с ошибками
 	echo header( 'Location: '.$_SERVER['HTTP_REFERER'], true, 301 );
 }
@@ -97,6 +96,6 @@ $confirmed = 0;
 
 
 }
-
+*/
 
  ?>

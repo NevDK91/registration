@@ -1,4 +1,6 @@
 <?php
+require '../vendor/autoload.php';
+use Mailgun\Mailgun;
 
 function mailing($confirmCode, $recip, $messages){
 
