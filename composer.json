@@ -1,15 +1,12 @@
-"repositories": [
-    {
-        "type": "pear",
-        "url": "http://pear.php.net"
+{
+    "require": {
+        "pear-pear/pear": "1.9.4",
+        "pear-pear/Mail_Mime": "1.8.7"
     },
-    {
-        "type": "pear",
-        "url": "http://phpseclib.sourceforge.net",
-        "vendor-alias": "phpseclib"
-    }
-],
-"require-dev": {
-    "pear-pear/Mail": "*",
-    "phpseclib/Net_SSH2": "*"
+    "repositories": [
+        {
+            "type": "pear",
+            "url": "http://pear.php.net"
+        }
+    ]
 }

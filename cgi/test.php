@@ -1,6 +1,9 @@
 <?php
 
 require_once "Mail.php";
+require 'vendor/autoload.php';
+var_dump(class_exists('Mail_mime') && class_exists('Mail_mimePart'));
+
  
 $from = "Web Master <webmaster@example.com>";
 $to = "nevdk@hotmail.com";
