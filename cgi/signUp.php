@@ -21,10 +21,11 @@ $inputs = array(
 
 $inputs = validate($inputs, "signUp", $messages);
 var_dump($inputs);
-/*
+
 if($inputs == false){// Если есть невалидные поля - вернуть в форму с ошибками
 	echo header( 'Location: '.$_SERVER['HTTP_REFERER'], true, 301 );
 }
+/*
 else{// Если все поля валидны продолжить регистрацию
 
 $mysqli = dbConnect();	
