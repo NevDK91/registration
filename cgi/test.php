@@ -17,8 +17,8 @@ $headers = array ('From' => $from,
 
 $smtp = Mail::factory('smtp',
   array ( 'host' => $host,
-          'IDHost' => 'heroku.com',
-          'port' => 25,
+          /*'IDHost' => 'heroku.com',
+          'port' => 25,*/
           'auth' => true,
           'username' => $username,
           'password' => $password));
