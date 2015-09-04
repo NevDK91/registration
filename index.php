@@ -3,6 +3,7 @@
 	require_once "cgi/functions.php"; // getProfile()
 	require_once "cgi/messages.php"; // локализация сообений
 	$locale = _getLocale();
+	$mysqli = dbConnect();
 
 	if(empty( $_SESSION["token"] )){
 		if( function_exists( "mcrypt_create_iv" ) ){
@@ -39,7 +40,7 @@
 				}
 				else{
 					$page_title = $messages["pageTitleProfile"][$locale];
-					$profile = getProfile( $_SESSION["signedUserId"] );
+					$profile = getProfile( $_SESSION["signedUserId"], $mysqli );
 					require_once "views/profile.php";
 				}
 		break;

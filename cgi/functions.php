@@ -1,11 +1,9 @@
 <?php
 
-function getProfile($id){
+function getProfile($id, $mysqli){
 	if( ( isset($_SESSION["signedUserId"]) ) && ( !empty($_SESSION["signedUserId"]) ) ) {
 
-	$mysqli = mysqli_connect( 'localhost','root','','forms');     /* (server, user, password, databaseName) База данных для запросов по умолчанию */
-
-	if (!$mysqli) { 
+	if ($mysqli == false) { 
 	   printf("Невозможно подключиться к базе данных. Код ошибки: %s\n", mysqli_connect_error()); 
 	   exit; 
 	};
