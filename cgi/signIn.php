@@ -24,22 +24,25 @@ $email = $inputs[0]["fieldValue"];
 $password = $inputs[1]["fieldValue"];
 
 $mysqli = dbConnect();
+var_dump($mysqli);
 
-	if (!$mysqli) { 
+	if ($mysqli == false) { 
 	   printf("Невозможно подключиться к базе данных. Код ошибки: %s\n", mysqli_connect_error()); 
 	   exit; 
-	};
+	}
+	else {
 
-	$mysqli->query( "SET CHARSET 'utf8'" );
+		$mysqli->query( "SET CHARSET 'utf8'" );
 
-	$sql = "select id,password,confirmed from users where email='$email' ";
+		$sql = "select id,password,confirmed from users where email='$email' ";
 
-	$res = $mysqli->query($sql);
+		$res = $mysqli->query($sql);
 
-	while($row = $res->fetch_assoc()) {
-		$password_hash = $row["password"];
-		$userId = $row["id"];
-		$confirmed = $row["confirmed"];
+		while($row = $res->fetch_assoc()) {
+			$password_hash = $row["password"];
+			$userId = $row["id"];
+			$confirmed = $row["confirmed"];
+		}
 	}
 /* Закрываем соединение */ 
 	mysqli_close($mysqli);
