@@ -14,11 +14,14 @@ $password = "568425a8079a926e57fd3f226bb547ee";
 $headers = array ('From' => $from,
   'To' => $to,
   'Subject' => $subject);
+
 $smtp = Mail::factory('smtp',
-  array ('host' => $host,
-    'auth' => true,
-    'username' => $username,
-    'password' => $password));
+  array ( 'host' => $host,
+          'IDHost' => 'heroku.com',
+          'port' => 587,
+          'auth' => true,
+          'username' => $username,
+          'password' => $password));
  
 $mail = $smtp->send($to, $headers, $body);
  
