@@ -1,5 +1,5 @@
 <?php
-
+/*
 require '../vendor/autoload.php';
 use Mailgun\Mailgun;
 
@@ -14,9 +14,8 @@ $result = $mgClient->sendMessage($domain, array(
 
 
 	));
-var_dump($result);
  
-/*$from = "Web Master <webmaster@example.com>";
+$from = "Web Master <webmaster@example.com>";
 $to = "nevdk@hotmail.com";
 $subject = "Test email using PHP SMTP\r\n\r\n";
 $body = "This is a test email message";
