@@ -77,7 +77,7 @@ $confirmed = 0;
 	if ($res === TRUE) {
 	  
 
-	  $mailed = mailing($confirmCode, $fields["email"], $messages["mail"]);
+	  $mailed = mailing($confirmCode, $fields["email"], $messages["mail"], $mgClient);
 	  var_dump($mailed);
 
 	  if($mailed == true){
