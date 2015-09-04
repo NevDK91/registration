@@ -1,15 +1,14 @@
-function showHelper(input,id){
+function showHelper(input,id){ // Показывает хелперы для полей формы, когда поля в фокусе
             document.getElementById("for_"+id).style.display = "block";
             input.onblur = function(id){
                 document.getElementById("for_"+input.id).style.display = "none";
         };
     };
 
-function validate(form, validatable, localeMessages){
+function validate(form, validatable, localeMessages){ // объяление функции валидации полей формы регулярными выражениями
     var message = "<ul>";
-            var allValid = true;
-
-            var field;
+            var allValid = true; // переменная, пропускающая отправку формы 
+            var field; // заносятся поля формы по одному в цикле ниже
             var password, passConfirm;
             for(var i = 0;i < validatable.length;i++){// цикл по массиву с объектами полей формы
                     field = validatable[i]; // переменной в каждой итерации присваивается объект 
@@ -50,13 +49,13 @@ function validate(form, validatable, localeMessages){
 };     
 
 window.onload = function(){
-    htmlTag = document.getElementsByTagName("html");
+    htmlTag = document.getElementsByTagName("html"); // взять текущий язык, нужно для вывода сообщений об ошибках на текущем языке
     locale = htmlTag[0].attributes.lang.value;
     console.log( locale );
 
     var form = document.forms[0];
 
-    if(form.name == "signUp"){
+    if(form.name == "signUp"){ // валидация формы регистрации
 
      form.onsubmit = function(e) {
             e.preventDefault();
@@ -64,10 +63,10 @@ window.onload = function(){
             var validatableSignUp = [// Описание всх полей формы и данных для валидации в виде json
             {
                 fieldName: "firstName",
-                fieldCaption: localeMessages["fieldCaption"]["firstName"][ locale ],
+                fieldCaption: localeMessages["fieldCaption"]["firstName"][ locale ], // берется из локального хранилища js/messages.jsonp, в зависимости от выбранного языка
                 value:  form.elements.firstName.value,
                 regExp: /[a-zA-Zа-яА-я ]{2,100}$/,
-                validMsg: localeMessages["validMsg"]["firstName"][ locale ]
+                validMsg: localeMessages["validMsg"]["firstName"][ locale ] // аналогично ^
             },
              {
                 fieldName: "lastName",
@@ -130,13 +129,13 @@ window.onload = function(){
 
         ];
 
-          validate(form, validatableSignUp, localeMessages);  
+          validate(form, validatableSignUp, localeMessages);  // выполнение функции валидации, передаются тип формы(регистрация, авторизация), поля для валидации и хранилище сообщений на рахных языках
 
         }; //end formSignUp.onsubmit
        }// endif(form.name == signUp) 
 
 
-         else if(form.name == "signIn") {
+         else if(form.name == "signIn") { // валидация формы авторизации
 
      form.onsubmit = function(e) {
             e.preventDefault();
@@ -164,5 +163,5 @@ window.onload = function(){
         };
     }// endif(form.name == signIn)
 
-     }
+     } // end window.onload
 

@@ -1,4 +1,7 @@
 <?php 
+
+/*	ВХОД В УЧЕТНУЮ ЗАПИСЬ	*/
+
 session_start();
 include_once 'validate.php';
 include_once "messages.php";
@@ -6,7 +9,7 @@ include_once "functions.php";
 
 $locale = _getLocale();
 
-if(!empty( $_POST["csrf_token"] )){
+if(!empty( $_POST["csrf_token"] )){		// проверка соответствует ли токен, пришедший с формой авторизации токену, сгенерированому для пользователя при первом его входе на сайт
 	if( hash_equals($_POST["csrf_token"], $_SESSION["token"]) )
 	{
 
@@ -47,12 +50,12 @@ var_dump($mysqli);
 /* Закрываем соединение */ 
 	mysqli_close($mysqli);
 
-	if( password_verify($password, $password_hash) ){
-		if($confirmed == 0){
+	if( password_verify($password, $password_hash) ){	// проверка соответствия пороля из формы и хэша из БД
+		if($confirmed == 0){ // учетная запись не была подтверждена
 				$_SESSION["errors"] = "<p class=errorMsg>".$messages["signIn"]["notConfirmed"][ $_SESSION["locale"] ]."</p>";
 				echo header( 'Location: '.$_SERVER['HTTP_REFERER'], true, 301 );
 		}
-		else{
+		else{ // пароли совпали - в сессию id пользователя для проверки авторизации, сообщение об успехе и перенаправление на стр профиля
 				$_SESSION["signedUserId"] = $userId;
 				$_SESSION["success"] = "<p class=successMsg>".$messages["signIn"]["successSignIn"][$locale]."</p>";
 				echo header( 'Location: http://'.$_SERVER['SERVER_NAME']."/index.php?action=profile", true, 301 );
@@ -60,14 +63,14 @@ var_dump($mysqli);
 		}
 			
 	}
-	else{
+	else{ // пароли не совпали
 			$_SESSION["errors"] = "<p class=errorMsg>".$messages["signIn"]["wrongEmailOrPass"][ $_SESSION["locale"] ]."</p>";
 			echo header( 'Location: '.$_SERVER['HTTP_REFERER'], true, 301 );
 	};
 
 
 	}
-	else{
+	else{ // токены не совпали
 		echo "Попытка взлома!";
 		exit;
 	}

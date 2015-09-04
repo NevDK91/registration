@@ -1,4 +1,7 @@
 <?php
+
+/*	АКТИВАЦИЯ АККАУНТА ИЗ ПОЧТОВОГО ЯЩИКА	*/
+
 session_start();
 require_once "messages.php";
 require_once "functions.php";

@@ -1,11 +1,15 @@
 <?php
-session_start();
-include_once 'validate.php';
-include_once 'messages.php';
-include_once 'functions.php';
-include_once 'mail.php';
 
-$inputs = array(
+/*	РЕГИСТРАЦИЯ	*/
+
+session_start();
+include_once 'validate.php'; // функция валидации
+include_once 'messages.php'; // хранилище разных языков
+include_once 'functions.php'; // дополнительные функции
+include_once 'mail.php'; // функци отправки сообщений для активации
+
+$inputs = array( // массив с данными из формы + дополнительные данные для валидации ( регулярные выр., обязательно ли к заполнению, описание поля, сообщение об ошибке валидации )
+
 		[ "fieldName" => "firstName", "fieldValue" => $_POST["firstName"], "regExp" => "/[a-zA-Zа-яА-я ]{2,100}$/", "required" => true, "fieldCaption" => $messages["fieldCaption"]["firstName"][ $_SESSION["locale"] ], "validMsg" => $messages["validate"]["firstName"][ $_SESSION["locale"] ] ],
 		[ "fieldName" => "lastName", "fieldValue" => $_POST["lastName"], "regExp" => "/[a-zA-Zа-яА-я ]{2,100}$/", "required" => true, "fieldCaption" => $messages["fieldCaption"]["lastName"][ $_SESSION["locale"] ], "validMsg" => $messages["validate"]["lastName"][ $_SESSION["locale"] ]  ],
 		[ "fieldName" => "email", "fieldValue" => $_POST["email"], "regExp" => "/^[A-z0-9._-]+@[A-z0-9.-]+\.[A-z]{2,4}$/", "required" => true, "fieldCaption" => $messages["fieldCaption"]["email"][ $_SESSION["locale"] ], "validMsg" => $messages["validate"]["email"][ $_SESSION["locale"] ]  ],
@@ -19,7 +23,7 @@ $inputs = array(
 	);
 
 
-$inputs = validate($inputs, "signUp", $messages);
+$inputs = validate($inputs, "signUp", $messages); // функция валидации полей, передаются массив с полями и доп. данными, тип формы(регистрация), массив с разными языками
 
 if($inputs == false){// Если есть невалидные поля - вернуть в форму с ошибками
 	echo header( 'Location: '.$_SERVER['HTTP_REFERER'], true, 301 );
@@ -27,11 +31,11 @@ if($inputs == false){// Если есть невалидные поля - вер
 
 else{// Если все поля валидны продолжить регистрацию
 
-$mysqli = dbConnect();	
+$mysqli = dbConnect();	// подключение к БД
 	
 $fields = [];
 
-	for ($i=0;$i < count($inputs); $i++){
+	for ($i=0;$i < count($inputs); $i++){ 		// выборка только названий и значений полей формы
 		$fieldName = $inputs[$i]["fieldName"];
 		$fields[$fieldName] = $inputs[$i]["fieldValue"];
 	}
@@ -52,14 +56,14 @@ $imagePath = "";
 		}
 
 	}
-	else{
+	else{									// если файл не загрузили, выбирается стандартный
 		$imagePath = 'uploads/default.jpg';
 	}
 	
 
-$confirmCode = generateRandomString(40);	
-$passwordHashed = password_hash($fields['password'], PASSWORD_DEFAULT);
-$confirmed = 0;
+$confirmCode = generateRandomString(40);	// генерация кода активации, посылается на почту
+$passwordHashed = password_hash($fields['password'], PASSWORD_DEFAULT);	// хэширование пароля
+$confirmed = 0;	// переменная, говорящая, что только что зарегистрарованная учетная запись не подтверждена
 
 	 
 
@@ -77,8 +81,7 @@ $confirmed = 0;
 	if ($res === TRUE) {
 	  
 
-	  $mailed = mailing($confirmCode, $fields["email"], $messages["mail"], $mgClient);
-	  var_dump($mailed);
+	  $mailed = mailing($confirmCode, $fields["email"], $messages["mail"], $mgClient); // отправка кода активации на почту
 
 	  if($mailed == true){
 
