@@ -20,12 +20,11 @@ $inputs = array(
 
 
 $inputs = validate($inputs, "signUp", $messages);
-var_dump($inputs);
 
 if($inputs == false){// Если есть невалидные поля - вернуть в форму с ошибками
 	echo header( 'Location: '.$_SERVER['HTTP_REFERER'], true, 301 );
 }
-/*
+
 else{// Если все поля валидны продолжить регистрацию
 
 $mysqli = dbConnect();	
@@ -73,6 +72,7 @@ $confirmed = 0;
 
 	$sql = "insert into users() values(null, '$fields[firstName]', '$fields[lastName]', '$fields[email]', '$passwordHashed', '$fields[birthYear]', '$fields[livingArea]', '$fields[phoneNumber]', '$fields[about]', '$imagePath', '$fields[sex]', '$confirmCode', $confirmed)";
 	$res = $mysqli->query($sql);
+	var_dump($res);
 	// Performs the $sql query on the server to create the database
 	if ($res === TRUE) {
 	  
@@ -88,7 +88,6 @@ $confirmed = 0;
 
 	}
 	else {
-		var_dump($res);
 	 	echo '<br>Error: '. $mysqli->error;
 
 	}
@@ -97,6 +96,6 @@ $confirmed = 0;
 
 
 }
-*/
+
 
  ?>
