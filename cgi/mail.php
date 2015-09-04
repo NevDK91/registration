@@ -21,9 +21,9 @@ use Mailgun\Mailgun;
 
         ));
 
-        echo $result->http_response_code;
+        //echo $result->http_response_code;
 
-        return true
+        return true;
 }
 
 

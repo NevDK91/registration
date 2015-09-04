@@ -70,12 +70,13 @@ $confirmed = 0;
 	$mysqli->query( "SET CHARSET 'utf8'" );
 
 	$sql = "insert into users() values(null, '$fields[firstName]', '$fields[lastName]', '$fields[email]', '$passwordHashed', '$fields[birthYear]', '$fields[livingArea]', '$fields[phoneNumber]', '$fields[about]', '$imagePath', '$fields[sex]', '$confirmCode', $confirmed)";
-
+	$res = $mysqli->query($sql);
 	// Performs the $sql query on the server to create the database
-	if ($mysqli->query($sql) === TRUE) {
+	if ($res === TRUE) {
 	  
 
 	  $mailed = mailing($confirmCode, $fields["email"], $messages["mail"]);
+	  var_dump($mailed);
 
 	  if($mailed){
 
@@ -85,7 +86,7 @@ $confirmed = 0;
 
 	}
 	else {
-
+		var_dump($res);
 	 	echo '<br>Error: '. $mysqli->error;
 
 	}
