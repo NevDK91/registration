@@ -1,12 +1,4 @@
-{
-    "require": {
-        "pear-pear/pear": "*",
-        "pear-pear/Mail_Mime": "*"
-    },
-    "repositories": [
-        {
-            "type": "pear",
-            "url": "http://pear.php.net"
-        }
-    ]
+{     "require": {
+        "mailgun/mailgun-php": "^1.8"
+    }
 }

@@ -1,11 +1,22 @@
 <?php
 
-require_once "Mail.php";
-require 'vendor/autoload.php';
-var_dump(class_exists('Mail_mime') && class_exists('Mail_mimePart'));
+require '../vendor/autoload.php';
+use Mailgun\Mailgun;
 
+$mgClient = new Mailgun('key-4cacb41e03508007a4d2990e16ab5dd4');
+$domain = 'sandbox3dd7c349f5714e2ab9f49d8998b5f809.mailgun.org';
+
+$result = $mgClient->sendMessage($domain, array(
+		'from' => 'Excited User <mailgun@sandbox3dd7c349f5714e2ab9f49d8998b5f809.mailgun.org>',
+		'to'   =>  'Baz <nevdk@hotmail.com>',
+		'subject' => 'Hello',
+		'text' => 'Testing some Mailgun'
+
+
+	));
+var_dump($result);
  
-$from = "Web Master <webmaster@example.com>";
+/*$from = "Web Master <webmaster@example.com>";
 $to = "nevdk@hotmail.com";
 $subject = "Test email using PHP SMTP\r\n\r\n";
 $body = "This is a test email message";
@@ -32,7 +43,7 @@ if (PEAR::isError($mail)) {
   echo("<p>" . $mail->getMessage() . "</p>");
 } else {
   echo("<p>Message successfully sent!</p>");
-}
+}*/
 
 
  ?>
